@@ -301,17 +301,12 @@ int main()
     int maxValue = 100;
     int testTimes = 1000000;
     cout << "test begin" << endl;
-    /*
-    serialize pre:   83 86 77 # 93 # 86 # # # 62 # 90 59 63 # # # 72 # # 
-    serialize pos:   # # # # 86 93 77 # 86 # # # 63 # 59 # # 72 90 62 83 
-    serialize level: 83 86 # 62 # 77 # 90 93 # 59 # 72 # # 86 # # 63 # #
-    */
     for (int i = 0; i < testTimes; i++) {
         Node *head = generateRandomBST(maxLevel, maxValue);
         queue<string> pre = serialize_pre(head);
         queue<string> pos = serialize_pos(head);
         queue<string> level = serialize_level(head);
-        printTree(head);
+        //printTree(head);
         Node *preBuild = reconstruct_btree_with_pre_serialize(pre);
         Node *posBuild = reconstruct_btree_with_pos_serialize(pos);
         Node *levelBuild = reconstruct_btree_with_level_serialize(level);
