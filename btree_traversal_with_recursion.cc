@@ -1,18 +1,10 @@
 #include <iostream>
+#include "btree_print.h"
 
 /*
 遍历二叉树：递归方式
 */
 
-struct Node 
-{
-    struct Node *left;
-    struct Node *right;
-    int val;
-
-    Node(int v, Node *l, Node *r) : 
-        val(v), left(l), right(r) {}
-};
 
 //先序遍历：头左右
 void btree_pre_traversal(Node *p)

@@ -1,21 +1,13 @@
 #include <iostream>
 #include <queue>
 #include <unordered_map>
+#include "btree_print.h"
 
 /*
 1. 层序遍历
 2. 获取最大层宽
 */
 
-struct Node 
-{
-    struct Node *left;
-    struct Node *right;
-    int val;
-
-    Node(int v, Node *l, Node *r) : 
-        val(v), left(l), right(r) {}
-};
 
 /*
 层序遍历, 依赖队列实现

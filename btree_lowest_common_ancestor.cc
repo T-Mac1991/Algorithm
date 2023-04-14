@@ -2,20 +2,12 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include "btree_print.h"
 using namespace std;
 /*
 求两个节点的最小公共祖先lowest common ancestor
 */
 
-struct Node 
-{
-    struct Node *left;
-    struct Node *right;
-    int val;
-
-    Node(int v, Node *l = nullptr, Node *r = nullptr) : 
-        val(v), left(l), right(r) {}
-};
 
 //中序遍历，得到所有节点的父节点
 void in_order(Node *p, unordered_map<Node *, Node *> &parentmap)

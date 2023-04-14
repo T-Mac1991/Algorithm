@@ -1,27 +1,20 @@
 #include <iostream>
 #include <stack>
+#include "btree_print.h"
+
 /*
 遍历二叉树：非递归方式, 基于栈实现
 
 最好能画一下二叉树的每一步的流程，能很好的帮助理解代码
 */
 
-struct Node 
-{
-    struct Node *left;
-    struct Node *right;
-    int val;
-
-    Node(int v, Node *l, Node *r) : 
-        val(v), left(l), right(r) {}
-};
 
 /*
 先序遍历：头左右
 目的：出栈顺序为头左右（即先序遍历）
 1. 头节点入栈
 2. 节点pop出栈，打印(处理)头节点
-3. 先右节点入栈，再左节点入栈 （因为栈FILO）
+3. 先右节点入栈，再左节点入栈 （因为栈FILO, 保证左先出栈）
 4. goto step 2 循环处理
 */
 void btree_pre_traversal(Node *p)
@@ -140,7 +133,7 @@ void btree_pos_traversal_with_one_stack(Node *p)
         // 先判断left节点，
         if (cur->left && 
             cur->left != lastOutNode /*若相等，表示left已被处理过了，不需要再次入栈了*/ && 
-            cur->right != lastOutNode /*若相等，表示right已被处理过了（先处理left，在处理right）*/ )
+            cur->right != lastOutNode /*若相等，表示right已被处理过了（先处理left，再处理right）*/ )
         {
             s.push(cur->left);
         }
