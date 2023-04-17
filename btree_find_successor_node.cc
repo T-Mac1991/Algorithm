@@ -55,7 +55,6 @@ void in_order(NodeEx *p)
     in_order(p->right);
 }
 
-#define ALG_TEST
 #ifdef ALG_TEST
 
 int main()

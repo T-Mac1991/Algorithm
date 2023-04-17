@@ -4,6 +4,9 @@
 #include <unordered_map>
 #include <queue>
 #include <stack>
+using namespace std;
+
+#define ALG_TEST
 
 struct Node 
 {
@@ -95,3 +98,32 @@ void printTree(Node *root) {
     }
 }
 
+#ifdef ALG_TEST
+
+// for test
+Node* generate(int level, int maxLevel, int maxValue) {
+    int random = rand() % maxValue;
+
+    if (level > maxLevel || random < (maxValue >> 1))
+    {
+        return nullptr;
+    }
+    Node *head = new Node(random);
+    head->left = generate(level + 1, maxLevel, maxValue);
+    head->right = generate(level + 1, maxLevel, maxValue);
+    return head;
+}
+
+// for test
+Node* generateRandomBST(int maxLevel, int maxValue) {
+    static bool flag = false;
+    if (!flag)
+    {
+        srand(time(nullptr));
+        flag = true;
+    }
+
+    return generate(1, maxLevel, maxValue);
+}
+
+#endif // ALG_TEST

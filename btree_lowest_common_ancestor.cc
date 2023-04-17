@@ -163,24 +163,7 @@ Node *get_lowest_common_ancestor_with_recursion(Node *head, Node *p1, Node *p2)
 #define ALG_TEST
 #ifdef ALG_TEST
 
-// for test
-Node* generate(int level, int maxLevel, int maxValue) {
-    int random = rand() % maxValue;
 
-    if (level > maxLevel || random < (maxValue >> 1))
-    {
-        return nullptr;
-    }
-    Node *head = new Node(random);
-    head->left = generate(level + 1, maxLevel, maxValue);
-    head->right = generate(level + 1, maxLevel, maxValue);
-    return head;
-}
-
-// for test
-Node* generateRandomBST(int maxLevel, int maxValue) {
-    return generate(1, maxLevel, maxValue);
-}
 
 // for test
 void fillPrelist(Node *head, vector<Node*> &arr) {

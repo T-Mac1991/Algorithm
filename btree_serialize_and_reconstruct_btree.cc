@@ -256,27 +256,7 @@ Node *reconstruct_btree_with_level_serialize(queue<string> serial)
     return head;
 }
 
-#define ALG_TEST
 #ifdef ALG_TEST
-
-// for test
-Node* generate(int level, int maxLevel, int maxValue) {
-    int random = rand() % maxValue;
-
-    if (level > maxLevel || random < (maxValue >> 1))
-    {
-        return nullptr;
-    }
-    Node *head = new Node(random);
-    head->left = generate(level + 1, maxLevel, maxValue);
-    head->right = generate(level + 1, maxLevel, maxValue);
-    return head;
-}
-
-// for test
-Node* generateRandomBST(int maxLevel, int maxValue) {
-    return generate(1, maxLevel, maxValue);
-}
 
 // for test
 bool isSameValueStructure(Node *head1, Node *head2) {

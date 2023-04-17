@@ -40,6 +40,10 @@ void btree_level_traversal(Node *p)
     std::cout << std::endl;
 }
 
+/*
+获取最大层宽
+通过hash table实现
+*/
 int get_max_width_with_hashtable(Node *p)
 {
     if (!p)
@@ -90,6 +94,10 @@ int get_max_width_with_hashtable(Node *p)
     return max_width;
 }
 
+/*
+获取最大层宽
+不通过hash table实现
+*/
 int get_max_width_without_hashtable(Node *p)
 {
     if (!p)
