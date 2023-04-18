@@ -54,38 +54,34 @@ bool isFullBT(Node *p)
 
 /*
 方法二：
-树型DP，拆分为左右子树的子问题
+树型DP思路：
+1. 分割为左右子树的子问题
+2. 采用一个结构体作为返回值，该结构体需要能包括左右子树的结果集
 
 */
 struct TreeInfo
 {
-    bool isFull;
-    int height;
-    int count;
+    bool isFull; //是否为满二叉树
+    int height;  //树高度
     TreeInfo() {}
-    TreeInfo(bool full, int h, int c) : isFull(full), height(h), count(c) {}
+    TreeInfo(bool full, int h) : isFull(full), height(h) {}
 };
 
 TreeInfo isFullBT2_impl(Node *p)
 {
     if (!p)
-        return TreeInfo(true, 0, 0);
+        return TreeInfo(true, 0);
 
     TreeInfo left = isFullBT2_impl(p->left);
     TreeInfo right = isFullBT2_impl(p->right);
     
     TreeInfo info;
     info.height = max(left.height, right.height) + 1;
-    info.count = left.count + right.count + 1;
 
-    if (left.height != right.height || 
-        !left.isFull || 
-        !right.isFull)
-        info.isFull = false;
+    if (left.isFull && right.isFull && left.height == right.height)
+        info.isFull = true;
     else
-    {
-        info.isFull = (info.count == (1 << info.height) - 1) ? true : false;
-    }
+        info.isFull =  false;
 
     return info;
 }
@@ -93,9 +89,46 @@ TreeInfo isFullBT2_impl(Node *p)
 bool isFullBT2(Node *p)
 {
     TreeInfo info = isFullBT2_impl(p);
-    cout << "Tree node count: " << info.count << ", height: " << info.height << ", isFull:" << info.isFull << endl;
+    cout << "height: " << info.height << ", isFull:" << info.isFull << endl;
     return info.isFull;
     // return (info.count == (1 << info.height) - 1) ? true : false;
+}
+
+
+/*
+方法三：
+树型DP思路：
+1. 分割为左右子树的子问题
+2. 采用一个结构体作为返回值，该结构体需要能包括左右子树的结果集
+
+*/
+struct TreeInfo2
+{
+    int height; //树高度
+    int count;  //节点个数
+    TreeInfo2() {}
+    TreeInfo2(int h, int c) : height(h), count(c) {}
+};
+
+TreeInfo2 isFullBT3_impl(Node *p)
+{
+    if (!p)
+        return TreeInfo2(0, 0);
+
+    TreeInfo2 left = isFullBT3_impl(p->left);
+    TreeInfo2 right = isFullBT3_impl(p->right);
+    
+    TreeInfo2 info;
+    info.height = max(left.height, right.height) + 1;
+    info.count = left.count + right.count + 1;
+    return info;
+}
+
+bool isFullBT3(Node *p)
+{
+    TreeInfo2 info = isFullBT3_impl(p);
+    cout << "Tree node count: " << info.count << ", height: " << info.height << endl;
+    return (info.count == (1 << info.height) - 1) ? true : false;
 }
 
 #ifdef ALG_TEST
@@ -109,7 +142,10 @@ int main()
     for (int i = 0; i < testTimes; i++) {
         Node *head = generateRandomBST(maxLevel, maxValue);
         printTree(head);
-        if (isFullBT(head) != isFullBT2(head))
+        bool isFull1 = isFullBT(head);
+        bool isFull2 = isFullBT2(head);
+        bool isFull3 = isFullBT3(head);
+        if (isFull1 != isFull2 || isFull1 != isFull3)
         {
             cout << "Oops!" << endl;
             return 1;

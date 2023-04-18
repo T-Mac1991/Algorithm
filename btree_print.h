@@ -46,7 +46,11 @@ std::vector<Node *> inorderTraversal(Node *root) {
  * @param root  二叉树根节点
  */
 void printTree(Node *root) {
-    if (!root)return;
+    if (!root)
+    {
+        std::cout << "[Empty Tree]" << std::endl;
+        return;
+    }
     auto tmp = root;
     std::vector<Node *> intv = inorderTraversal(tmp);//中序遍历节点数组
     std::string template_str;//模板string，表示每行打印string的长度
@@ -116,12 +120,14 @@ Node* generate(int level, int maxLevel, int maxValue) {
 
 // for test
 Node* generateRandomBST(int maxLevel, int maxValue) {
+#ifdef _DEBUG
     static bool flag = false;
     if (!flag)
     {
         srand(time(nullptr));
         flag = true;
     }
+#endif
 
     return generate(1, maxLevel, maxValue);
 }
