@@ -26,10 +26,28 @@
   判断是否为搜索二叉树
   btree_isBST.cc
 
+
+
 链表
   1. 查找链表的环入口节点，若无环，返回nullptr
   2. 两个链表中，查找第一个相交的节点。注意，链表可能有环，也可能是没有环
   find_first_intersect_node.cc
+
+基础提高
+
+  布隆过滤器
+
+  一致性哈希
+
+  岛数量
+  number_of_island.cc
+
+  并查集
+  union_find_set.cc
+
+  KMP
+
+  Manacher
 
 
 
