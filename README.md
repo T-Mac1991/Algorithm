@@ -43,11 +43,24 @@
   number_of_island.cc
 
   并查集
-  union_find_set.cc
+  union_find_set.h
 
-  KMP
+  KMP：查找子串
+  KMP.cc
 
-  Manacher
+  Manacher：计算回文
+  Manacher.cc
+
+  滑动窗口: 获取窗口最大值
+  max_sliding_window.cc
+
+  单调栈：数组中每一个数，得到左边最近的比它大的和右边最近的比它大的数
+  near_bigger_no_repeat.cc
+
+  单调栈：接雨水问题
+  receiving_rain.cc
+
+
 
 
 
