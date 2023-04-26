@@ -127,6 +127,8 @@ int get_max_distance(Node *p)
 #ifdef ALG_TEST
 int main()
 {
+
+
     int maxLevel = 10;
     int maxValue = 100;
     int testTimes = 100000;

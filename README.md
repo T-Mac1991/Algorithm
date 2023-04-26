@@ -66,6 +66,9 @@
   接雨水问题: 备忘录、双指针、单调栈
   receiving_rain.cc
 
+位运算
+  获取max，不能使用比较运算
+  get_max.c
 
 
 
