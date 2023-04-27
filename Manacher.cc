@@ -69,9 +69,42 @@ string get_max_palindrome(string s)
 }
 
 /*
+计算最大回文：暴力解法2
+不做预处理
+*/
+string get_max_palindrome_impl(string &s, int i, int j)
+{
+    while (i >= 0 && j < s.size() && s[i] == s[j])
+    {
+        i--;
+        j++;
+    }
+    string ret = s.substr(i + 1, j - i - 1);
+    return ret;
+}
+
+string get_max_palindrome2(string s)
+{
+    if (s.size() < 2)
+        return s;
+
+    string ret;
+    for (int i = 0; i < s.size() - 1; i++)
+    {
+        string s1 = get_max_palindrome_impl(s, i, i);
+        string s2 = get_max_palindrome_impl(s, i, i + 1);
+        if (s1.size() > s2.size() && s1.size() > ret.size())
+            ret = s1;
+        else if (s1.size() <= s2.size() && s2.size() > ret.size())
+            ret = s2;
+    }
+
+    return ret;
+}
+
+/*
 计算最大回文：Manacher算法
 */
-
 void process(int &r, int &c, int i, int j, string &ret, string &s, vector<int> &arr)
 {
     while (i - j >= 0 && i + j < s.size())
@@ -168,30 +201,33 @@ using namespace chrono;
 int main()
 {
     int possibilities = 2;
-    int strSize = 100000;
+    int strSize = 100;
     int testTimes = 5000000;
     cout << ("test begin") << endl;
     srand(time(nullptr));
     for (int i = 0; i < testTimes; i++)
     {
         string str = getRandomString(possibilities, strSize);
+        cout << "str: " << str << endl;
 
-        //cout << "str: " << str << endl;
-        
         auto t1 = chrono::system_clock::now();
         string s1 = get_max_palindrome(str);
+        string s2 = get_max_palindrome2(str);
         auto t2 = chrono::system_clock::now();
         auto duration = chrono::duration_cast<milliseconds>(t2 - t1);
         cout << "func1: " << duration.count() << "ms" << endl;
         
         t1 = chrono::system_clock::now();
-        string s2 = get_max_palindrome_Manacher(str);
+        string s3 = get_max_palindrome_Manacher(str);
         t2 = chrono::system_clock::now();
         duration = chrono::duration_cast<milliseconds>(t2 - t1);
         cout << "func2: " << duration.count() << "ms" << endl;
-        if (s1 != s2)
+        if (s1 != s2 || s1 != s3)
         {
-            cout << "s1: " << s1 << ", s2: " << s2 << "Oops!" << endl;
+            cout << "s1: " << s1 << endl;
+            cout << "s2: " << s2 << endl;
+            cout << "s3: " << s3 << endl;
+            cout << "Oops!" << endl;
             return 1;
         }
     }
