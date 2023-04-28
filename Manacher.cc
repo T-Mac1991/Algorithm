@@ -137,7 +137,7 @@ string get_max_palindrome_Manacher(string s)
     s = pre_process(s);
     int r = -1; //最大回文右边界
     int c = -1; //center中心点
-    vector<int> arr(s.size(), 0); //回文半径数组
+    vector<int> arr(s.size(), 0);    //回文半径数组
     arr[0] = 0;
     string ret;
     for (int i = 0; i < s.size(); i++)

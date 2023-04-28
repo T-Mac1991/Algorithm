@@ -98,6 +98,37 @@ int get_max_width_with_hashtable(Node *p)
 获取最大层宽
 不通过hash table实现
 */
+int get_max_width_without_hashtable2(Node *p)
+{
+    if (!p)
+        return 0;
+
+    queue<Node *> que;
+    que.push(p);
+    int max_width = 0;
+    while (!que.empty())
+    {
+        int width = que.size();
+        if (width > max_width)
+            max_width = width;
+            
+        for (int i = 0; i < width; i++)
+        {
+            p = que.front();
+            que.pop();
+            if (p->left)
+                que.push(p->left);
+            if (p->right)
+                que.push(p->right);
+        }
+    }
+    return max_width;
+}
+
+/*
+获取最大层宽
+不通过hash table实现
+*/
 int get_max_width_without_hashtable(Node *p)
 {
     if (!p)
@@ -145,25 +176,6 @@ int get_max_width_without_hashtable(Node *p)
 
 #include <chrono>
 
-// for test
-Node* generate(int level, int maxLevel, int maxValue) 
-{
-    int random = rand() % maxValue;
-    if (level > maxLevel || (level > (maxLevel >> 1) && random < (maxValue >> 1)))
-    {
-        return nullptr;
-    }
-    Node *head = new Node(random,
-                          generate(level + 1, maxLevel, maxValue),
-                          generate(level + 1, maxLevel, maxValue));
-    return head;
-}
-
-Node* generateRandomBT(int maxLevel, int maxValue) {
-    srand(time(nullptr));
-    return generate(1, maxLevel, maxValue);
-}
-
 int main()
 {
     Node left2(4, nullptr, nullptr);
@@ -190,8 +202,12 @@ int main()
     int maxValue = 100;
     int testTimes = 1000000;
     for (int i = 0; i < testTimes; i++) {
-        Node* head = generateRandomBT(maxLevel, maxValue);
-        if (get_max_width_with_hashtable(head) != get_max_width_without_hashtable(head)) {
+        Node* head = generateRandomBST(maxLevel, maxValue);
+        int w = get_max_width_with_hashtable(head);
+        int w1 = get_max_width_without_hashtable(head);
+        int w2 = get_max_width_without_hashtable2(head);
+        if (w != w1 || w != w2)
+        {
             std::cout << "Oops!" << std::endl;
             return 1;
         }
