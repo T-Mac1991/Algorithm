@@ -1,6 +1,6 @@
 # readme   
 
-二叉树
+二叉树btree
   遍历二叉树（递归）
   btree_traversal_with_recursion.cc     
 
@@ -34,10 +34,7 @@
 
 
 
-链表
-  1. 查找链表的环入口节点，若无环，返回nullptr
-  2. 两个链表中，查找第一个相交的节点。注意，链表可能有环，也可能是没有环
-  find_first_intersect_node.cc
+
 
 基础提高
 
@@ -70,6 +67,18 @@
   获取max，不能使用比较运算
   get_max.c
 
+动态规划Dynamic Programming
+  has_path_sum.cc
+
+双指针问题
+  leetcode
+  
+  链表
+  1. 查找链表的环入口节点，若无环，返回nullptr
+  2. 两个链表中，查找第一个相交的节点。注意，链表可能有环，也可能是没有环
+  find_first_intersect_node.cc
 
 
+汉明重量，SWAR算法计算1的个数
+swar.c
 
